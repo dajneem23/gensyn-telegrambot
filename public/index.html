@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hello, World!</title>
+	</head>
+	<body>
+		<h1 id="heading"></h1>
+		<p>This page comes from a static asset stored at `public/index.html` as configured in `wrangler.jsonc`.</p>
+		<button id="button" type="button">Fetch a random UUID</button> <br />
+		<button id="registerBtn" type="button" >Register Webhook</button>
+
+		<output id="random" for="button"></output>
+		<script>
+			fetch('/message')
+				.then((resp) => resp.text())
+				.then((text) => {
+					const h1 = document.getElementById('heading');
+					h1.textContent = text;
+				});
+
+			const button = document.getElementById("button");
+			button.addEventListener("click", () => {
+				fetch('/random')
+					.then((resp) => resp.text())
+					.then((text) => {
+						const random = document.getElementById('random');
+						random.textContent = text;
+					});
+			});
+			const registerBtn = document.getElementById("registerBtn");
+			registerBtn.addEventListener("click", () => {
+				fetch('/registerWebhook')
+				.then((resp) => resp.text())
+				.then((data) => {
+					alert(`Webhook registered with ID: ${data.id}`);
+				})
+				.catch((error) => {
+					console.error('Error registering webhook:', error);
+				});
+			});
+		</script>
+	</body>
+</html>
