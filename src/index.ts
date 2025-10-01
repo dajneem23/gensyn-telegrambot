@@ -75,6 +75,7 @@ async function onMessage(message: any) {
 				\nAvailable commands:
 				\n/status peer_id -- Get the status of a Gensyn peer
 				\nExample: /status QmQfPmjJVS42aCJB99TqToVFk1tgaZ4GXnhhWgSWdtnQwq
+				\n/getTotalRewards eoa1,eoa2,... -- Get the total rewards of one or more EOAs (comma separated)
 				\n Powered by Cloudflare Workers, @dajneem23 with ❤️
 				`);
 				return sendPlainText(message.chat.id, txt);
